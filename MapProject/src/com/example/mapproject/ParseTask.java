@@ -14,7 +14,6 @@ public class ParseTask extends AsyncTask<String, Void, JSONObject> {
 
 
 
-	String url = "http://dev.virtualearth.net/REST/v1/Traffic/Incidents/40.711795,-74.150409,40.942486,-73.738422?key=AoHoD_fdpQD73-OoTNnnsGzYu5ClXmVNAGr2t-M_wKbR8TWHqKrZR1X6GHI5pzWm";
 	
 	GoogleMap gm;
 	
@@ -28,7 +27,7 @@ public class ParseTask extends AsyncTask<String, Void, JSONObject> {
 	
 	protected JSONObject doInBackground(String... params) {
 		JSONParser jParser = new JSONParser();
-		final JSONObject jobject = jParser.getJSONFromUrl(url);
+		final JSONObject jobject = jParser.getJSONFromUrl(params[0]);
 		return jobject;
 		
 		

@@ -25,7 +25,7 @@ public class JSONParser {
 	}
 
 	
-	////// HATA VAR/////**********///
+	///// HATA VAR/////**********///
 	public JSONObject getJSONFromUrl(String url) {
 		
 
