@@ -12,37 +12,30 @@ import android.os.AsyncTask;
 
 public class ParseTask extends AsyncTask<String, Void, JSONObject> {
 
-
-
-	
 	GoogleMap gm;
-	
-	
+
 	protected ParseTask(GoogleMap googleMap) {
-		gm=googleMap;
-		
+		gm = googleMap;
+
 	}
 
-
-	
 	protected JSONObject doInBackground(String... params) {
 		JSONParser jParser = new JSONParser();
 		final JSONObject jobject = jParser.getJSONFromUrl(params[0]);
 		return jobject;
-		
-		
+
 	}
-	
+
 	@Override
 	protected void onPostExecute(JSONObject jobject) {
-		String str_estimatedTotal=null;
-		String str_type=null;
-		String strdescription=null;
-		String strlane=null;
-		String str_zero=null;
-		String strroadClosed=null;
-		String strroadseverity=null;
-		
+		String str_estimatedTotal = null;
+		String str_type = null;
+		String strdescription = null;
+		String strlane = null;
+		String str_zero = null;
+		String strroadClosed = null;
+		String strroadseverity = null;
+
 		try {
 
 			JSONArray jarray = jobject.getJSONArray("resourceSets");
@@ -68,8 +61,7 @@ public class ParseTask extends AsyncTask<String, Void, JSONObject> {
 						// resources
 						JSONArray jarrresources = jobjresources
 								.getJSONArray("resources");
-						
-						
+
 						for (int j = 0; j < jarrresources.length(); j++) {
 							System.out.println("$$$$$$$$$$ ITEM " + j
 									+ " START $$$$$$$$$$$$$$$$#");
@@ -79,7 +71,7 @@ public class ParseTask extends AsyncTask<String, Void, JSONObject> {
 										.getJSONObject(j);
 								if (!jobjjarrresources.isNull("__type")) {
 									// __type"
-									
+
 									str_type = jobjjarrresources
 											.getString("__type");
 									System.out.println("resources str_type :"
@@ -132,13 +124,19 @@ public class ParseTask extends AsyncTask<String, Void, JSONObject> {
 																+ k
 																+ ": "
 																+ str_zero);
-												//adding to map as a marker
-												double lat=(Double) jarcoordinates.get(0);
-												double lon=(Double) jarcoordinates.get(1);
-												LatLng positionLatLng=new LatLng(lat, lon);
-												gm.addMarker(new MarkerOptions().position(positionLatLng).title(strdescription));
-											} 
-											
+												// adding to map as a marker
+												double lat = (Double) jarcoordinates
+														.get(0);
+												double lon = (Double) jarcoordinates
+														.get(1);
+												LatLng positionLatLng = new LatLng(
+														lat, lon);
+												gm.addMarker(new MarkerOptions()
+														.position(
+																positionLatLng)
+														.title(strdescription));
+											}
+
 											else {
 												System.out
 														.println("coordinates :"
@@ -206,7 +204,7 @@ public class ParseTask extends AsyncTask<String, Void, JSONObject> {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		return;
 	}
 }
